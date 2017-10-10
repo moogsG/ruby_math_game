@@ -1,10 +1,13 @@
 class Turn
   attr_reader :current_player
-  def initialize
-    @current_player = $playerOne
+  def initialize(playerOne, playerTwo)
+    @playerOne = playerOne
+    @playerTwo = playerTwo
+    @current_player = playerOne
   end
-  # Runs Tur
+
   def newTurn
+
     question = MathQuestions.new
     p "#{@current_player.name}: #{question.question}"
     reply = gets.chomp.to_i
@@ -16,14 +19,14 @@ class Turn
       @current_player.loseLife
     end
 
-    puts "#{$playerOne.score} VS #{$playerTwo.score}"
+    puts "#{@playerOne.score} VS #{@playerTwo.score}"
     if @current_player.lives > 0
       puts '---- NEW TURN ----'
     else
       puts "---- GAME OVER ----"
     end
-    
-    @current_player == $playerTwo ? @current_player = $playerOne : @current_player = $playerTwo
+
+    @current_player == @playerTwo ? @current_player = @playerOne : @current_player = @playerTwo
 
    end
 end
